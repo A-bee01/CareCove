@@ -39,7 +39,11 @@ export const useStore = () => {
     balance: 100,
     transactions: [],
     transactionsLoading: true,
-    pfiAllowlist: [],
+    pfiAllowlist: Object.keys(mockProviderDids).map(key => ({
+      pfiUri: mockProviderDids[key].uri,
+      pfiName: mockProviderDids[key].name,
+      pfiDescription: mockProviderDids[key].description,
+    })),
     selectedTransaction: null,
     offering: null,
     payinCurrencies: [],
@@ -61,7 +65,9 @@ export const useStore = () => {
       for (const pfi of state.pfiAllowlist) {
         const pfiUri = pfi.pfiUri
         // TODO 2: Fetch offerings from PFIs
-        const offerings = []
+        const offerings = await TbdexHttpClient.getOfferings({
+          pfiDid: pfiUri
+        })
         allOfferings.push(...offerings)
       }
 
@@ -74,25 +80,49 @@ export const useStore = () => {
 
   const createExchange = async (offering, amount, payoutPaymentDetails) => {
     // TODO 3: Choose only needed credentials to present using PresentationExchange.selectCredentials
-    const selectedCredentials = []
+    const selectedCredentials = PresentationExchange.selectCredentials({
+      vcJwts: state.customerCredentials,
+      presentationDefinition: offering.data.requiredClaims,
+    })
 
     // TODO 4: Create RFQ message to Request for a Quote
-    const rfq = {}
+    const rfq = Rfq.create({
+      metadata: {
+        from: state.customerDid.uri,
+        to: offering.metadata.from,
+        protocol: '1.0'
+      },
+      data: {
+        offeringId: offering.id,
+        payin: {
+          amount: amount.toString(),
+          kind: offering.data.payin.methods[0].kind,
+          paymentDetails: {}
+        },
+        payout: {
+          kind: offering.data.payout.methods[0].kind,
+          paymentDetails: payoutPaymentDetails
+        },
+        claims: selectedCredentials
+      },
+    })
 
-    try{
+    try {
       // TODO 5: Verify offering requirements with RFQ - rfq.verifyOfferingRequirements(offering)
-
+      rfq.verifyOfferingRequirements(offering)
     } catch (e) {
       // handle failed verification
       console.log('Offering requirements not met', e)
     }
 
     // TODO 6: Sign RFQ message
+    await rfq.sign(state.customerDid)
 
     console.log('RFQ:', rfq)
 
     try {
       // TODO 7: Submit RFQ message to the PFI .createExchange(rfq)
+      await TbdexHttpClient.createExchange(rfq)
     }
     catch (error) {
       console.error('Failed to create exchange:', error);
@@ -102,7 +132,10 @@ export const useStore = () => {
   const fetchExchanges = async (pfiUri) => {
     try {
       // TODO 8: get exchanges from the PFI
-      const exchanges = []
+      const exchanges = await TbdexHttpClient.getExchanges({
+        pfiDid: pfiUri,
+        did: state.customerDid
+      });
 
       const mappedExchanges = formatMessages(exchanges)
       return mappedExchanges
@@ -113,10 +146,21 @@ export const useStore = () => {
 
   const addClose = async (exchangeId, pfiUri, reason) => {
     // TODO 9: Create Close message, sign it, and submit it to the PFI
-    const close = {}
+    const close = Close.create({
+      metadata: {
+        from: state.customerDid.uri,
+        to: pfiUri,
+        exchangeId,
+      },
+      data: {
+        reason
+      }
+    })
 
+    await close.sign(state.customerDid)
     try {
       // send Close message
+      await TbdexHttpClient.submitClose(close)
     }
     catch (error) {
       console.error('Failed to close exchange:', error);
@@ -125,11 +169,18 @@ export const useStore = () => {
 
   const addOrder = async (exchangeId, pfiUri) => {
     // TODO 10: Create Order message, sign it, and submit it to the PFI
-    const order = {}
+    const order = Order.create({
+      metadata: {
+        from: state.customerDid.uri,
+        to: pfiUri,
+        exchangeId
+      }
+    })
 
+    await order.sign(state.customerDid)
     try {
       // Send order message
-
+      return await TbdexHttpClient.submitOrder(order)
     } catch (error) {
       console.error('Failed to submit order:', error);
     }
@@ -138,7 +189,7 @@ export const useStore = () => {
   const pollExchanges = () => {
     const fetchAllExchanges = async () => {
       console.log('Polling exchanges again...');
-      if(!state.customerDid) return
+      if (!state.customerDid) return
       const allExchanges = []
       try {
         for (const pfi of state.pfiAllowlist) {
@@ -180,30 +231,30 @@ export const useStore = () => {
 
   const formatMessages = (exchanges) => {
     const formattedMessages = exchanges.map(exchange => {
-        const latestMessage = exchange[exchange.length - 1]
-        const rfqMessage = exchange.find(message => message.kind === 'rfq')
-        const quoteMessage = exchange.find(message => message.kind === 'quote')
-        // console.log('quote', quoteMessage)
-        const status = generateExchangeStatusValues(latestMessage)
-        const fee = quoteMessage?.data['payin']?.['fee']
-        const payinAmount = quoteMessage?.data['payin']?.['amount']
-        const payoutPaymentDetails = rfqMessage.privateData?.payout.paymentDetails
-        return {
-          id: latestMessage.metadata.exchangeId,
-          payinAmount: (fee ? Number(payinAmount) + Number(fee) : Number(payinAmount)).toString() || rfqMessage.data['payinAmount'],
-          payinCurrency: quoteMessage.data['payin']?.['currencyCode'] ?? null,
-          payoutAmount: quoteMessage?.data['payout']?.['amount'] ?? null,
-          payoutCurrency: quoteMessage.data['payout']?.['currencyCode'],
-          status,
-          createdTime: rfqMessage.createdAt,
-          ...latestMessage.kind === 'quote' && {expirationTime: quoteMessage.data['expiresAt'] ?? null},
-          from: 'You',
-          to: payoutPaymentDetails?.address || payoutPaymentDetails?.accountNumber + ', ' + payoutPaymentDetails?.bankName || payoutPaymentDetails?.phoneNumber + ', ' + payoutPaymentDetails?.networkProvider || 'Unknown',
-          pfiDid: rfqMessage.metadata.to
-        }
-      })
+      const latestMessage = exchange[exchange.length - 1]
+      const rfqMessage = exchange.find(message => message.kind === 'rfq')
+      const quoteMessage = exchange.find(message => message.kind === 'quote')
+      // console.log('quote', quoteMessage)
+      const status = generateExchangeStatusValues(latestMessage)
+      const fee = quoteMessage?.data['payin']?.['fee']
+      const payinAmount = quoteMessage?.data['payin']?.['amount']
+      const payoutPaymentDetails = rfqMessage.privateData?.payout.paymentDetails
+      return {
+        id: latestMessage.metadata.exchangeId,
+        payinAmount: (fee ? Number(payinAmount) + Number(fee) : Number(payinAmount)).toString() || rfqMessage.data['payinAmount'],
+        payinCurrency: quoteMessage.data['payin']?.['currencyCode'] ?? null,
+        payoutAmount: quoteMessage?.data['payout']?.['amount'] ?? null,
+        payoutCurrency: quoteMessage.data['payout']?.['currencyCode'],
+        status,
+        createdTime: rfqMessage.createdAt,
+        ...latestMessage.kind === 'quote' && { expirationTime: quoteMessage.data['expiresAt'] ?? null },
+        from: 'You',
+        to: payoutPaymentDetails?.address || payoutPaymentDetails?.accountNumber + ', ' + payoutPaymentDetails?.bankName || payoutPaymentDetails?.phoneNumber + ', ' + payoutPaymentDetails?.networkProvider || 'Unknown',
+        pfiDid: rfqMessage.metadata.to
+      }
+    })
 
-      return formattedMessages;
+    return formattedMessages;
   }
 
   const loadCredentials = () => {
@@ -226,20 +277,20 @@ export const useStore = () => {
       title: vc.type[vc.type.length - 1].replace(/(?<!^)(?<![A-Z])[A-Z](?=[a-z])/g, ' $&'), // get the last credential type in the array and format it with spaces
       name: vc.credentialSubject['name'],
       countryCode: vc.credentialSubject['countryOfResidence'],
-      issuanceDate: new Date(vc.issuanceDate).toLocaleDateString(undefined, {dateStyle: 'medium'}),
+      issuanceDate: new Date(vc.issuanceDate).toLocaleDateString(undefined, { dateStyle: 'medium' }),
     }
   }
 
- // Watch the balance and persist it to localStorage on change
- watch(() => state.balance, (newBalance) => {
-  if (typeof window !== 'undefined') {
-    localStorage.setItem('walletBalance', newBalance.toString());
-  }
-});
+  // Watch the balance and persist it to localStorage on change
+  watch(() => state.balance, (newBalance) => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('walletBalance', newBalance.toString());
+    }
+  });
 
   const generateExchangeStatusValues = (exchangeMessage) => {
     if (exchangeMessage instanceof Close) {
-      if (exchangeMessage.data.reason.toLowerCase().includes('complete') || exchangeMessage.data.reason.toLowerCase().includes('success') ) {
+      if (exchangeMessage.data.reason.toLowerCase().includes('complete') || exchangeMessage.data.reason.toLowerCase().includes('success')) {
         return 'completed'
       } else if (exchangeMessage.data.reason.toLowerCase().includes('expired')) {
         return exchangeMessage.data.reason.toLowerCase()
@@ -328,7 +379,7 @@ export const useStore = () => {
   };
 
   const satisfiesOfferingRequirements = (offering, credentials) => {
-    if(credentials.length === 0 || !offering.data.requiredClaims) {
+    if (credentials.length === 0 || !offering.data.requiredClaims) {
       return false;
     }
 
@@ -376,6 +427,6 @@ export const useStore = () => {
     loadCredentials();
   });
 
-  return { state, selectTransaction, setOffering, deductAmount, formatAmount, fetchOfferings, filterOfferings, satisfiesOfferingRequirements, addCredential, renderCredential, createExchange, fetchExchanges, renderOrderStatus, addOrder, addClose, getOfferingById, pollExchanges};
+  return { state, selectTransaction, setOffering, deductAmount, formatAmount, fetchOfferings, filterOfferings, satisfiesOfferingRequirements, addCredential, renderCredential, createExchange, fetchExchanges, renderOrderStatus, addOrder, addClose, getOfferingById, pollExchanges };
 
 };

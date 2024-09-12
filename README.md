@@ -35,9 +35,9 @@ Let’s build a future where compassion knows no boundaries and where every act 
 * We aim to connect NGOs to Philanthropists who are readily available to donate to causes.
 * These NGOs contact CareCove to create causes.
 * A wallet for both NGOs and Donors for sending and receiving money.
-* Every donation from these philanthropists will be received in $USD no matter the currency used then can be also sent out to the NGOs in their currencies if supported by tbDEX. This is to say;
+* Every donation from these philanthropists will be received in $USD no matter the currency used then can also be sent out to the NGOs in their currencies if supported by tbDEX. This is to say;
 
-When an NGO from Nigeria adds a cause and people from Nigeria donate with NGN, CareCove will receive it in USD and when CoreCove wants to send it out to the NGO that created the cause, it will be sent as NGN.
+When an NGO from Nigeria or any other country adds a cause and a Philantopists donate with NGN, KES, GHS etc, CareCove will receive it in USD and when CoreCove wants to send it out to the NGO that created that particular cause, it will be sent as NGN, GHS, KES and any other currency as far as it supported by tbDEX.
 
 ## Building the WebApp
 

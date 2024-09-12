@@ -40,11 +40,11 @@ Let’s build a future where compassion knows no boundaries and where every act 
 When an NGO from Nigeria or any other country adds a cause and a Philantopists donate with NGN, KES, GHS etc, CareCove will receive it in USD and when CoreCove wants to send it out to the NGO that created that particular cause, it will be sent as NGN, GHS, KES and any other currency as far as it supported by tbDEX.
 
 ## Building the WebApp
-![Building the WebApp](./)
+![Building the WebApp](./images/Images2.jpg)
 
 In this guide, we will be discussing our solution and how we built 
 our web app using technologies like Vs Code, HTML, CSS, Bootstrap, JavaScript, Tailwind, Node.Js, Express.Js, Typescript and Github.
 
 ## Defining the workflow
-![Defining the workflow](./Images2.jpg)
+![Defining the workflow](./images/Images1.jpg)
   

@@ -28,4 +28,4 @@ Let’s build a future where compassion knows no boundaries and where every act 
 
 
 <hr/>
-Access CareCove [here]([https://a-bee01.github.io/](https://carecove.vercel.app/#/))
+Access CareCove [here](https://carecove.vercel.app/#/)

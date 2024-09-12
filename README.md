@@ -74,31 +74,42 @@ The header contains the objective of the project. The body contains the features
 ![Technologies used](./images/Images3.png)
 
 ### [Visual studio code](https://code.visualstudio.com/download)
-This is a software application used for editing, testing and packaging and developing codes efficiently.
+This is a software application used for editing, testing packaging and developing codes efficiently.
 
 ### [HTML](https://html.com/) 
 HTML is a language for describing the structure 
-of Web pages. HTML gives authors the means to: Publish online documents with headings, 
+of Web pages. HTML gives authors the means to Publish online documents with headings, 
 text, tables, lists, images, etcetera.
 
 ### [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)
-This is for describing the 
-presentation of Web pages, including colors, layout, and fonts.
+This is to describe the 
+presentation of Web pages, including colours, layout, and fonts.
 
 ### [Bootstrap](https://getbootstrap.com/) 
-Bootstrap is a free CSS open source front-end 
+Bootstrap is a free CSS open-source front-end 
 development framework for the creation of websites and web apps designed to enable 
 responsive development.
 
 ### [JavaScript](https://www.javascript.com/) 
 Javascript is used to create dynamic
-and interactive web content like applications and browsers. We added our audios 
-using Javascript.
+and interactive web content like applications and browsers. 
 
 ### [Github](https://docs.github.com/en/get-started/quickstart/hello-world)
 This is a code hosting platform for version control and collaboration. It lets 
 you and others work together on projects from anywhere.
 
-These technologies were put together to build our webapp.
+### [Tailwind]()
+
+### [Express.Js]()
+
+### [Node.Js]()
+
+### [Typescript]()
+
+These technologies were put together to build our Web Application.
+
+
+## Future Progression
+*
 
 

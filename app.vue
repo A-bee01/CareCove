@@ -1,4 +1,7 @@
 <template>
+    <div>
+      <NuxtPage />
+    </div>
   </template>
   <script setup lang="ts">
   import { useStore } from '~/data_providers/donation_handler.js';

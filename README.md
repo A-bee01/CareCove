@@ -43,7 +43,7 @@ When an NGO from Nigeria or any other country adds a cause and a Philantopists d
 ![Building the WebApp](./C:\Users\abbyd\Downloads\84f0c69a-9c27-4893-b9c1-7797846022f0.jpg)
 
 In this guide, we will be discussing our solution and how we built 
-our web app using technologies like Vs code, HTML, CSS, Bootstrap, JavaScript, Typescript and Github.
+our web app using technologies like Vs Code, HTML, CSS, Bootstrap, JavaScript, Tailwind, Node.Js, Express.Js, Typescript and Github.
 
 ## Defining the workflow
 ![Defining the workflow](./images/image2.jpg)

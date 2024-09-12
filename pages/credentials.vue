@@ -26,7 +26,7 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { useStore } from '~/store.js';
+import { useStore } from '~/data_providers/donation_handler.js';
 import Header from '~/components/Header.vue';
 
 const router = useRouter();
@@ -42,6 +42,6 @@ const createCredential = async () => {
 
   addCredential(credential);
 
-  router.push('/send');
+  router.push('/donate');
 };
 </script>

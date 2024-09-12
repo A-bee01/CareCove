@@ -1,11 +1,11 @@
 <template>
   <div class="flex flex-col min-h-screen">
     <Header />
-    <main class="flex-1 bg-gray-100 dark:bg-gray-800 py-8 px-6 md:px-8">
+    <main class="flex-1 bg-[ffffff] dark:bg-[ffffff] py-8 px-6 md:px-8">
       <div class="max-w-3xl mx-auto grid gap-8">
         <!-- Step 1: Select From and To Currencies, Display Offerings -->
-        <div v-if="step === 1" class="bg-white dark:bg-gray-900 rounded-lg shadow p-6">
-          <h2 class="text-2xl font-bold mb-4 dark:text-white">Send Money</h2>
+        <div v-if="step === 1" class="bg-white dark:bg-[#10673b] rounded-lg shadow p-6">
+          <h2 class="text-2xl font-bold mb-4 dark:text-white">Donate Funds</h2>
           <div v-if="state.payinCurrencies.length">
             <div class="mb-4">
               <label class="block text-gray-700 dark:text-gray-300 mb-2">From Currency</label>
@@ -94,7 +94,7 @@
 <script setup>
 import { ref, watch } from 'vue';
 import Header from '~/components/Header.vue';
-import { useStore } from '~/store.js';
+import { useStore } from '~/data_providers/donation_handler.js';
 import { useRouter } from 'vue-router';
 import Spinner from '~/components/Spinner.vue';
 

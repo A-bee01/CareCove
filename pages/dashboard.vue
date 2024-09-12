@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col min-h-screen">
     <Header />
-    <main class="flex-1 bg-gray-100 dark:bg-gray-800 py-8 px-6 md:px-8 dark:text-white">
+    <main class="flex-1 bg-[#39b34d] dark:bg-[#ffffff] py-8 px-6 md:px-8 dark:text-white">
       <div class="max-w-3xl mx-auto grid gap-8">
         <Balances />
         <Credentials />

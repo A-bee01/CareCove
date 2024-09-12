@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white dark:bg-gray-900 rounded-lg shadow p-6">
+  <div class="bg-white dark:bg-[#10673b] rounded-lg shadow p-6">
     <h2 class="text-2xl font-bold mb-4">Transactions</h2>
     <div>
       <ul v-if="transactions.length">
@@ -37,7 +37,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import { useStore } from '~/store.js';
+import { useStore } from '~/data_providers/donation_handler.js';
 import Spinner from '~/components/Spinner.vue'
 import TransactionModal from '~/components/TransactionModal.vue';
 

@@ -112,7 +112,7 @@
 
 <script setup>
 import { computed } from 'vue';
-import { useStore } from '~/store.js';
+import { useStore } from '~/data_providers/donation_handler.js';
 import Spinner from '~/components/Spinner.vue'
 
 

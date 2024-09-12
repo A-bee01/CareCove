@@ -1,5 +1,5 @@
 
-import { reactive, watch } from 'vue';
+import { reactive, watch, onMounted } from 'vue';
 import { Close, Order, Rfq, TbdexHttpClient } from '@tbdex/http-client'
 import { DidDht } from '@web5/dids'
 import { Jwt, PresentationExchange } from '@web5/credentials'
@@ -36,14 +36,10 @@ const mockProviderDids = {
 
 export const useStore = () => {
   const state = reactive({
-    balance: parseFloat(localStorage.getItem('walletBalance')) || 100,
+    balance: 100,
     transactions: [],
     transactionsLoading: true,
-    pfiAllowlist: Object.keys(mockProviderDids).map(key => ({
-      pfiUri: mockProviderDids[key].uri,
-      pfiName: mockProviderDids[key].name,
-      pfiDescription: mockProviderDids[key].description,
-    })),
+    pfiAllowlist: [],
     selectedTransaction: null,
     offering: null,
     payinCurrencies: [],
@@ -52,6 +48,12 @@ export const useStore = () => {
     customerDid: null,
     customerCredentials: [],
   });
+
+  // Check if window object is available (client-side)
+  if (typeof window !== 'undefined') {
+    const storedBalance = localStorage.getItem('walletBalance');
+    state.balance = parseFloat(storedBalance) || 100;
+  }
 
   const fetchOfferings = async () => {
     try {
@@ -161,14 +163,15 @@ export const useStore = () => {
   // Beginning of Utils - functions that help with the app experience itself.
   const initializeDid = async () => {
     try {
-      // Make sure to use a more secure Key Manager in production. More info: https://developer.tbd.website/docs/web5/build/decentralized-identifiers/key-management
-      const storedDid = localStorage.getItem('customerDid');
-      if (storedDid) {
-        state.customerDid = await DidDht.import({ portableDid: JSON.parse(storedDid) });
-      } else {
-        state.customerDid = await DidDht.create({ options: { publish: true } });
-        const exportedDid = await state.customerDid.export();
-        localStorage.setItem('customerDid', JSON.stringify(exportedDid));
+      if (typeof window !== 'undefined') {
+        const storedDid = localStorage.getItem('customerDid');
+        if (storedDid) {
+          state.customerDid = await DidDht.import({ portableDid: JSON.parse(storedDid) });
+        } else {
+          state.customerDid = await DidDht.create({ options: { publish: true } });
+          const exportedDid = await state.customerDid.export();
+          localStorage.setItem('customerDid', JSON.stringify(exportedDid));
+        }
       }
     } catch (error) {
       console.error('Failed to initialize DID:', error);
@@ -227,10 +230,12 @@ export const useStore = () => {
     }
   }
 
-  // Watch the balance and persist to localStorage on change
-  watch(() => state.balance, (newBalance) => {
+ // Watch the balance and persist it to localStorage on change
+ watch(() => state.balance, (newBalance) => {
+  if (typeof window !== 'undefined') {
     localStorage.setItem('walletBalance', newBalance.toString());
-  });
+  }
+});
 
   const generateExchangeStatusValues = (exchangeMessage) => {
     if (exchangeMessage instanceof Close) {

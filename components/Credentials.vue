@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white dark:bg-gray-900 rounded-lg shadow p-6">
+  <div class="bg-white dark:bg-[#10673b] rounded-lg shadow p-6">
     <h2 class="text-2xl font-bold mb-4">Credentials</h2>
     <div v-if="parsedCredentials.length">
       <div v-for="credential, index in parsedCredentials" :key="index" class="mb-4 p-4 border rounded-lg lg:w-1/2 w-full">
@@ -15,7 +15,7 @@
 </template>
 
 <script setup>
-import { useStore } from '~/store.js';
+import { useStore } from '~/data_providers/donation_handler.js';
 
 const { state, renderCredential } = useStore();
 

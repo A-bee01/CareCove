@@ -27,5 +27,4 @@ In a world that can be divided, we believe in the power of kindness to create be
 Let’s build a future where compassion knows no boundaries and where every act of kindness brings us closer to oneness.
 
 
-<hr/>
-Access CareCove [here](https://carecove.vercel.app/#/)
+## Access CareCove [here](https://carecove.vercel.app/#/)

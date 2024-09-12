@@ -71,7 +71,7 @@ The header contains the objective of the project. The body contains the features
 
 
 ## Technologies used 
-![Technologies used](./images/Image3.jpg)
+![Technologies used](./images/Images3.png)
 
 ### [Visual studio code](https://code.visualstudio.com/download)
 This is a software application used for editing, testing and packaging and developing codes efficiently.

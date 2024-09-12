@@ -1,0 +1,1 @@
+export { default } from "file:///Users/ikechukwuokafor/Downloads/CareCove/node_modules/@nuxt/vite-builder/dist/runtime/client.manifest.mjs"

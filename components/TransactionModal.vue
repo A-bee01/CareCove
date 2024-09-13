@@ -1,6 +1,6 @@
 <template>
   <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50" @click="closeOnOutsideClick">
-    <div class="bg-white dark:bg-gray-900 rounded-lg shadow p-6 w-full max-w-md" @click.stop>
+    <div class="bg-white dark:bg-[#10673b] rounded-lg shadow p-6 w-full max-w-md" @click.stop>
       <div class="grid gap-6">
         <div class="flex items-center gap-4">
           <div>

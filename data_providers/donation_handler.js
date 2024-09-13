@@ -26,7 +26,6 @@ const mockProviderDids = {
     name: 'Titanium Trust',
     description: 'Provides offerings to exchange USD to African currencies - USD to GHS, USD to KES.'
   }
-  // TODO 11: Surprise surprise.
 };
 
 export const useStore = () => {

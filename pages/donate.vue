@@ -193,7 +193,7 @@ const validateAndSubmit = () => {
 const submitRequest = async () => {
   submitLoading.value = true
   await createExchange(offering.value, amount.value, paymentDetails.value)
-  router.push('/');
+  router.push('/dashboard');
 };
 
 const verifyCredentials = () => {

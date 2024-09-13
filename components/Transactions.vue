@@ -7,7 +7,7 @@
           v-for="transaction in transactions"
           :key="transaction.id"
           @click="openTransactionModal(transaction)"
-          class="flex items-center justify-between rounded-lg bg-gray-100 dark:bg-gray-800 p-4 transition-colors hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer mb-2"
+          class="flex items-center justify-between rounded-lg bg-gray-100 dark:bg-[#39b34d] p-4 transition-colors hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer mb-2"
         >
           <div class="flex items-center gap-4">
             <div class="bg-gray-200 dark:bg-gray-700 rounded-full p-2">
@@ -18,7 +18,7 @@
             </div>
             <div>
               <div class="font-medium">{{ getStatusString(transaction) }}</div>
-              <div class="text-gray-500 dark:text-gray-400 text-sm">{{ new Date(transaction.createdTime).toLocaleDateString(undefined, {dateStyle: 'medium'}) }}</div>
+              <div class="text-[gray-500] dark:text-white text-sm">{{ new Date(transaction.createdTime).toLocaleDateString(undefined, {dateStyle: 'medium'}) }}</div>
             </div>
           </div>
           <div v-if="transaction.status === 'quote'" className="w-1/5 flex items-center justify-end">

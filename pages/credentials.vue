@@ -1,9 +1,9 @@
 <template>
   <div class="flex flex-col min-h-screen">
     <Header />
-    <main class="flex-1 bg-gray-100 dark:bg-gray-800 py-8 px-6 md:px-8">
-      <div class="max-w-3xl mx-auto bg-white dark:bg-gray-900 rounded-lg shadow p-6">
-        <h2 class="text-2xl font-bold mb-4">Create Credential</h2>
+    <main class="flex-1 bg-[#ffffff] dark:bg-[#ffffff] py-8 px-6 md:px-8">
+      <div class="max-w-3xl mx-auto bg-white dark:bg-[#10673b] rounded-lg shadow p-6">
+        <h2 class="text-2xl font-bold mb-4 dark:text-white">Create Credential</h2>
         <p class="text-red-400 text-sm"> Required credential missing. Create Credential </p>
         <form @submit.prevent="createCredential">
           <div class="mb-4">

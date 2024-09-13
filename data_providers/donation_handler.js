@@ -7,27 +7,22 @@ import { Jwt, PresentationExchange } from '@web5/credentials'
 // TODO 1: Choose Mock PFI DIDs using info about services they provide.
 const mockProviderDids = {
   aquafinance_capital: {
-    uri: 'did:dht:qewzcx3fj8uuq7y551deqdfd1wbe6ymicr8xnua3xzkdw4n6j3bo',
+    uri: 'did:dht:3fkz5ssfxbriwks3iy5nwys3q5kyx64ettp9wfn1yfekfkiguj1y',
     name: 'AquaFinance Capital',
     description: 'Provides exchanges with the Ghanaian Cedis: GHS to USDC, GHS to KES'
   },
-  swiftliquidity_solutions: {
-    uri: 'did:dht:zz3m6ph36p1d8qioqfhp5dh5j6xn49cequ1yw9jnfxbz1uyfnddy',
-    name: 'SwiftLiquidity Solutions',
-    description: 'Offers exchange rates with the South African Rand: ZAR to BTC and EUR to ZAR.'
-  },
   flowback_financial: {
-    uri: 'did:dht:gxwaxgihty7ar5u44gcmmdbw4ka1rbpj8agu4fom6tmsaz7aoffo',
+    uri: 'did:dht:zkp5gbsqgzn69b3y5dtt5nnpjtdq6sxyukpzo68npsf79bmtb9zy',
     name: 'Flowback Financial',
     description: 'Offers international rates with various currencies - USD to GBP, GBP to CAD.'
   },
   vertex_liquid_assets: {
-    uri: 'did:dht:7zkzxjf84xuy6icw6fyjcn3uw14fty4umqd3nc4f8ih881h6bjby',
+    uri: 'did:dht:enwguxo8uzqexq14xupe4o9ymxw3nzeb9uug5ijkj9rhfbf1oy5y',
     name: 'Vertex Liquid Assets',
     description: 'Offers currency exchanges between African currencies - MAD to EGP, GHS to NGN.'
   },
   titanium_trust: {
-    uri: 'did:dht:kuggrw7nx3n4ehz455stdkdeuaekfjimhnbenpo8t4xz9gb8qzyy',
+    uri: 'did:dht:ozn5c51ruo7z63u1h748ug7rw5p1mq3853ytrd5gatu9a8mm8f1o',
     name: 'Titanium Trust',
     description: 'Provides offerings to exchange USD to African currencies - USD to GHS, USD to KES.'
   }

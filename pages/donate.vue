@@ -42,7 +42,7 @@
         </div>
 
         <!-- Step 2: Enter Transaction Details -->
-        <div v-if="step === 2" class="bg-white dark:bg-gray-900 rounded-lg shadow p-6">
+        <div v-if="step === 2" class="bg-white dark:bg-[#10673b] rounded-lg shadow p-6">
           <h2 class="text-2xl font-bold mb-4 dark:text-white">Enter Transaction Details</h2>
           <div class="mb-4">
           <p v-if="!isAmountValid && amount !== ''" class="text-red-500 mt-2">

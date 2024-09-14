@@ -15,14 +15,6 @@ export default defineNuxtConfig({
 
   vite: {
     plugins: [nodePolyfills()],
-    build: {
-      target: 'es2020',
-      rollupOptions: {
-        external: [
-          '/node_modules/node-stdlib-browser/helpers/esbuild/shim.js'
-        ]
-      }
-    },
     resolve: {
       alias: stdLibBrowser,
     },

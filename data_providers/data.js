@@ -33,7 +33,7 @@ const mockProviderDids = {
 
 export const useStore = () => {
   const state = reactive({
-    balance: 100,
+    balance: 10000,
     transactions: [],
     transactionsLoading: true,
     pfiAllowlist: Object.keys(mockProviderDids).map(key => ({

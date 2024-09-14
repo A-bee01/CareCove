@@ -15,6 +15,13 @@ export default defineNuxtConfig({
 
   vite: {
     plugins: [nodePolyfills()],
+    build: {
+      rollupOptions: {
+        external: [
+          '/node_modules/node-stdlib-browser/helpers/esbuild/shim.js'
+        ]
+      }
+    },
     resolve: {
       alias: stdLibBrowser,
     },
@@ -22,6 +29,10 @@ export default defineNuxtConfig({
       include: [
         'node-stdlib-browser/helpers/esbuild/shim',
       ],
+      exclude: ['node-stdlib-browser'],
+      esbuildOptions: {
+        inject: []
+      }
     },
   },
 

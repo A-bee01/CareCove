@@ -33,11 +33,10 @@
   import { ref } from 'vue';
   import { useRouter } from 'vue-router';
   import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, getAuth } from 'firebase/auth';
-  import { firebaseApp } from '~/src/firebaseConfig'; // Adjust based on where you place your Firebase config
   import Header from '~/components/Header.vue';
   
   const router = useRouter();
-  const auth = getAuth(firebaseApp);
+  const auth = getAuth();
   const email = ref('');
   const password = ref('');
   

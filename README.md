@@ -100,8 +100,8 @@ CareCove handles matching offerings from multiple PFIs by showing the rates of e
 
 
 ### Customer Management
-CareCove manages donors' DIDs and verifiable credentials by storing and retrieving their DIDs and verifiable credentials from both an online secure database (firebase firestore) and an offline database (local storage).
-Donor DIDs were required to be stored online so that they could manage their accounts and track previous transactions, pay or cancel pending quotes when they change their devices.
+CareCove manages donors' DIDs and verifiable credentials by storing and retrieving their DIDs and verifiable credentials from an online secure database (firebase firestore) and an offline database (local storage).
+Donors' DIDs are stored online so that they can manage their account and track previous transactions, pay or cancel pending quotes when they change their device.
 
 
 ### Customer Satisfaction

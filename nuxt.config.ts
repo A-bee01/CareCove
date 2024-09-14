@@ -28,13 +28,14 @@ export default defineNuxtConfig({
     optimizeDeps: {
       include: [
         'node-stdlib-browser/helpers/esbuild/shim',
+        'string.prototype.matchall'
       ],
-      exclude: ['node-stdlib-browser'],
+      exclude: ['node-stdlib-browser', 'fs', 'path', 'os', 'firestore', 'firebase/app', 'firebase/auth', 'firebase/firestore' ],
       esbuildOptions: {
         inject: []
       }
     },
   },
 
-  compatibilityDate: '2024-09-14',
+  compatibilityDate: '2024-04-03',
 })

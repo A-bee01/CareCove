@@ -4,7 +4,7 @@ import { DidDht } from '@web5/dids';
 import { Jwt, PresentationExchange } from '@web5/credentials';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
-import { useNuxtApp } from '#app';
+import { db } from '~/src/firebaseConfig'; // Firestore instance
 import { useRouter } from 'vue-router';
 
 // TODO 1: Choose Mock PFI DIDs using info about services they provide.
@@ -32,11 +32,8 @@ const mockProviderDids = {
 };
 
 export const useStore = () => {
-  const { $db, $auth } = useNuxtApp(); // Firestore instance
-  const router = useRouter();
-
   const state = reactive({
-    balance: 10000,
+    balance: 1000,
     transactions: [],
     transactionsLoading: true,
     pfiAllowlist: Object.keys(mockProviderDids).map(key => ({
@@ -61,32 +58,50 @@ export const useStore = () => {
 
   const loadBalance = async () => {
     try {
-      const user = $auth.currentUser;
+      // Get the currently authenticated user
+      const auth = getAuth();
+      const user = auth.currentUser;
 
       if (!user) {
+        // Redirect to login page if not authenticated
         console.log('User is not authenticated, redirecting to login...');
-        router.push('/login'); 
+        router.push('/login'); // Adjust the URL as per your routing
         return;
       }
 
-      const userDocRef = doc($db, 'donors', user.email);
+      // Fetch balance from Firestore
+      const userDocRef = doc(db, 'donors', user.email); // Assuming 'users' collection with documents named after user IDs
       const userDoc = await getDoc(userDocRef);
 
       if (userDoc.exists()) {
         const data = userDoc.data();
-        state.balance = data.balance || 10000;
-        localStorage.setItem('walletBalance', state.balance.toString());
+        if (data.balance) {
+          // Load balance from Firestore
+          state.balance = data.balance;
+          console.log('Balance loaded from Firestore:', state.balance);
+
+          // Optionally, save balance to localStorage for offline access
+          localStorage.setItem('walletBalance', state.balance.toString());
+        } else {
+          // Set default balance if none is found
+          state.balance = 10000;
+          console.log('No balance found, setting to default (1000)');
+        }
       } else {
-        state.balance = 10000;
-        await setDoc(userDocRef, { balance: state.balance });
+        console.log('User document does not exist in Firestore.');
+        state.balance = 10000; // Set default balance if user doc doesn't exist
+        await setDoc(userDocRef, { balance: state.balance }); // Save default balance to Firestore
       }
     } catch (error) {
       console.error('Error loading balance from Firestore:', error);
     }
   };
 
+  const auth = getAuth();
+  const router = useRouter();
+
   // Redirect to login if user is not authenticated
-  onAuthStateChanged($auth, (user) => {
+  onAuthStateChanged(auth, (user) => {
     if (!user) {
       router.push('/login'); // Redirect to login if not authenticated
     }
@@ -94,13 +109,17 @@ export const useStore = () => {
 
   const fetchOfferings = async () => {
     try {
-      const allOfferings = [];
+      const allOfferings = []
       for (const pfi of state.pfiAllowlist) {
-        const offerings = await TbdexHttpClient.getOfferings({ pfiDid: pfi.pfiUri });
-        allOfferings.push(...offerings);
+        const pfiUri = pfi.pfiUri
+        // TODO 2: Fetch offerings from PFIs
+        const offerings = await TbdexHttpClient.getOfferings({
+          pfiDid: pfiUri
+        })
+        allOfferings.push(...offerings)
       }
 
-      state.offerings = allOfferings;
+      state.offerings = allOfferings
       updateCurrencies();
     } catch (error) {
       console.error('Failed to fetch offerings:', error);
@@ -242,7 +261,7 @@ export const useStore = () => {
 
   const initializeDid = async () => {
     try {
-      const user = $auth.currentUser;
+      const user = auth.currentUser;
       if (!user) {
         console.error('No user is logged in');
         router.push('/login');
@@ -250,13 +269,15 @@ export const useStore = () => {
       }
 
       const email = user.email;
-      const donorRef = doc($db, 'donors', email);
+      const donorRef = doc(db, 'donors', email);
       const donorDoc = await getDoc(donorRef);
 
       if (donorDoc.exists()) {
+        // If a DID is stored in Firestore, retrieve it
         const storedDid = donorDoc.data().did;
         state.customerDid = await DidDht.import({ portableDid: JSON.parse(storedDid) });
 
+        // Load stored credentials if they exist
         const storedCredentials = donorDoc.data().credentials;
         if (storedCredentials) {
           state.customerCredentials = JSON.parse(storedCredentials);
@@ -264,16 +285,19 @@ export const useStore = () => {
         }
 
       } else {
+        // If no DID is stored, create one and save it to Firestore
         state.customerDid = await DidDht.create({ options: { publish: true } });
         const exportedDid = await state.customerDid.export();
 
+        // Save the DID and initial credentials to Firestore
         await setDoc(donorRef, {
           email: email,
           did: JSON.stringify(exportedDid),
-          credentials: JSON.stringify(state.customerCredentials),
+          credentials: JSON.stringify(state.customerCredentials), // Save empty credentials initially
           createdAt: new Date(),
         });
 
+        //Save to localStorage as a fallback
         localStorage.setItem('customerDid', JSON.stringify(exportedDid));
       }
     } catch (error) {
@@ -312,7 +336,8 @@ export const useStore = () => {
   const loadCredentials = async () => {
     try {
       // Get the currently authenticated user
-      const user = $auth.currentUser;
+      const auth = getAuth();
+      const user = auth.currentUser;
 
       if (!user) {
         console.error('No user is logged in');
@@ -321,7 +346,7 @@ export const useStore = () => {
       }
 
       // Fetch credentials from Firestore
-      const userDocRef = doc($db, 'users', user.uid); // Assuming 'users' collection with documents named after user IDs
+      const userDocRef = doc(db, 'users', user.uid); // Assuming 'users' collection with documents named after user IDs
       const userDoc = await getDoc(userDocRef);
 
       if (userDoc.exists()) {
@@ -348,9 +373,9 @@ export const useStore = () => {
   const addCredential = async (credential) => {
     state.customerCredentials.push(credential);
     localStorage.setItem('customerCredentials', JSON.stringify(state.customerCredentials));
-    const user = $auth.currentUser;
+    const user = auth.currentUser;
     if (user) {
-      const donorRef = doc($db, 'donors', user.email);
+      const donorRef = doc(db, 'donors', user.email);
       // Update Firestore with new credentials
       await setDoc(donorRef, {
         credentials: JSON.stringify(state.customerCredentials)
@@ -372,7 +397,8 @@ export const useStore = () => {
   // Watch the balance and persist it to localStorage on change
   watch(() => state.balance, async (newBalance) => {
     try {
-      const user = $auth.currentUser;
+      const auth = getAuth();
+      const user = auth.currentUser;
 
       if (!user) {
         console.log('User is not authenticated, redirecting to login...');
@@ -381,7 +407,7 @@ export const useStore = () => {
       }
 
       // Persist balance to Firestore
-      const userDocRef = doc($db, 'donors', user.email);
+      const userDocRef = doc(db, 'users', user.uid);
       await setDoc(userDocRef, { balance: newBalance }, { merge: true }); // Merge to avoid overwriting other fields
       console.log('Balance updated in Firestore:', newBalance);
 
@@ -447,7 +473,8 @@ export const useStore = () => {
       state.balance -= numericAmount;
 
       try {
-        const user = $auth.currentUser;
+        const auth = getAuth();
+        const user = auth.currentUser;
 
         if (!user) {
           console.log('User is not authenticated, redirecting to login...');
@@ -456,7 +483,7 @@ export const useStore = () => {
         }
 
         // Persist balance to Firestore
-        const userDocRef = doc($db, 'donors', user.email);
+        const userDocRef = doc(db, 'donors', user.email);
         await setDoc(userDocRef, { balance: state.balance }, { merge: true });
         console.log('Balance deducted and updated in Firestore:', state.balance);
 
@@ -547,32 +574,15 @@ export const useStore = () => {
   // Automatically fetch offerings on load
   onMounted(async () => {
     console.log('Fetching offerings...');
-    await fetchOfferings();
+    fetchOfferings();
     console.log('Initializing DID...');
     await initializeDid();
     console.log('Loading credentials...');
-    await loadCredentials();
+    loadCredentials();
     console.log('Loading balance...');
     await loadBalance();
   });
 
-  return {
-    state,
-    selectTransaction,
-    setOffering,
-    deductAmount,
-    formatAmount,
-    fetchOfferings,
-    filterOfferings,
-    satisfiesOfferingRequirements,
-    addCredential,
-    renderCredential,
-    createExchange,
-    fetchExchanges,
-    renderOrderStatus,
-    addOrder,
-    addClose,
-    getOfferingById,
-    pollExchanges,
-  };
+  return { state, selectTransaction, setOffering, deductAmount, formatAmount, fetchOfferings, filterOfferings, satisfiesOfferingRequirements, addCredential, renderCredential, createExchange, fetchExchanges, renderOrderStatus, addOrder, addClose, getOfferingById, pollExchanges };
+
 };

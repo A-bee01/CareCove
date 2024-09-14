@@ -15,7 +15,7 @@
 </template>
 
 <script setup>
-import { useStore } from '~/data_providers/donation_handler.js';
+import { useStore } from '~/data_providers/data';
 
 const { state, renderCredential } = useStore();
 

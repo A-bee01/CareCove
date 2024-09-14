@@ -26,7 +26,7 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { useStore } from '~/data_providers/donation_handler.js';
+import { useStore } from '~/data_providers/data.js';
 import Header from '~/components/Header.vue';
 
 const router = useRouter();

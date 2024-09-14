@@ -94,7 +94,7 @@
 <script setup>
 import { ref, watch } from 'vue';
 import Header from '~/components/Header.vue';
-import { useStore } from '~/data_providers/donation_handler.js';
+import { useStore } from '~/data_providers/data.js';
 import { useRouter } from 'vue-router';
 import Spinner from '~/components/Spinner.vue';
 

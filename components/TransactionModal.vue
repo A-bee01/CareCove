@@ -112,7 +112,7 @@
 
 <script setup>
 import { computed } from 'vue';
-import { useStore } from '~/data_providers/donation_handler.js';
+import { useStore } from '~/data_providers/data.js';
 import Spinner from '~/components/Spinner.vue'
 
 
@@ -144,10 +144,10 @@ const pay = async () => {
   // Handle payment logic
   loading.value = true;
   await addOrder(props.transaction.id, props.transaction.pfiDid)
-  if(props.transaction.payinCurrency === 'TB$' && props.transaction.payoutCurrency === 'USDC') {
-    deductAmount(props.transaction.payinAmount)
-    location.reload()
-  }
+ //if(props.transaction.payinCurrency === 'TB$' && props.transaction.payoutCurrency === 'USDC') {
+  await deductAmount(props.transaction.payinAmount)
+    
+ // }
   loading.value = false;
   emit('close');
 };

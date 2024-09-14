@@ -46,7 +46,7 @@ Let’s build a future where compassion knows no boundaries and where every act 
 
 * Philanthropists/Donors come to our Application and decide to donate to a particular cause.
 
-* They need to create an account by signing up first. This account allows CareCove to manage customer's verifiable credentials.
+* They need to create a wallet account by signing up first. This account allows CareCove to manage customers' verifiable credentials and DIDs.
 
 * Donors should have some money in his/her wallet. (These currencies must be supported by the tbDEX SDK)
 

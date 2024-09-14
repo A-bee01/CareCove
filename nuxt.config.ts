@@ -16,6 +16,7 @@ export default defineNuxtConfig({
   vite: {
     plugins: [nodePolyfills()],
     build: {
+      target: 'es2020',
       rollupOptions: {
         external: [
           '/node_modules/node-stdlib-browser/helpers/esbuild/shim.js'
@@ -28,9 +29,11 @@ export default defineNuxtConfig({
     optimizeDeps: {
       include: [
         'node-stdlib-browser/helpers/esbuild/shim',
-        'string.prototype.matchall'
+        'firebase/app',
+        'firebase/auth',
+        'firebase/firestore',
       ],
-      exclude: ['node-stdlib-browser', 'fs', 'path', 'os', 'firestore', 'firebase/app', 'firebase/auth', 'firebase/firestore' ],
+      exclude: ['node-stdlib-browser', 'fs', 'path', 'os' ],
       esbuildOptions: {
         inject: []
       }

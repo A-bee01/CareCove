@@ -8,8 +8,8 @@
   import { firebaseApp } from '~/src/firebaseConfig';
   import { provide } from 'vue';
   
-  // const store = useStore();
-  // provide('store', store);
+  const store = useStore();
+  provide('store', store);
   firebaseApp.automaticDataCollectionEnabled;
   
   useHead({
@@ -19,3 +19,4 @@
     ]
   })
   </script>
+  

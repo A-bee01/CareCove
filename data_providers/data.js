@@ -33,7 +33,7 @@ const mockProviderDids = {
 
 export const useStore = () => {
   const state = reactive({
-    balance: 1000,
+    balance: 10000,
     transactions: [],
     transactionsLoading: true,
     pfiAllowlist: Object.keys(mockProviderDids).map(key => ({
@@ -346,14 +346,14 @@ export const useStore = () => {
       }
 
       // Fetch credentials from Firestore
-      const userDocRef = doc(db, 'users', user.uid); // Assuming 'users' collection with documents named after user IDs
+      const userDocRef = doc(db, 'donors', user.email); // Assuming 'donors' collection with documents named after user emails
       const userDoc = await getDoc(userDocRef);
 
       if (userDoc.exists()) {
         const data = userDoc.data();
         if (data.credentials) {
           // Load credentials from Firestore
-          state.customerCredentials = data.credentials;
+          state.customerCredentials = JSON.parse(data.credentials);
           console.log('Credentials loaded from Firestore:', state.customerCredentials);
 
           // Optionally, save credentials to localStorage for offline access
@@ -407,7 +407,7 @@ export const useStore = () => {
       }
 
       // Persist balance to Firestore
-      const userDocRef = doc(db, 'users', user.uid);
+      const userDocRef = doc(db, 'donors', user.email);
       await setDoc(userDocRef, { balance: newBalance }, { merge: true }); // Merge to avoid overwriting other fields
       console.log('Balance updated in Firestore:', newBalance);
 

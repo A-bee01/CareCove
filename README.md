@@ -2,7 +2,7 @@
 
 CareCove is a platform dedicated to fostering a more inclusive society, ensuring that people from all backgrounds—children, 
 parents, and individuals alike—have access to essential opportunities, clean water, nutritious food, and quality education.
-The platform seeks to ensure that everyone feels represented, supported, and empowered to make a difference, ensuring no one faces their journey alone, no matter the societal challenges they encounter.
+The platform seeks to ensure that everyone feels represented, supported, and empowered to make a difference, ensuring no one faces their journey alone, no matter their societal challenges.
 
 
 ## Problem
@@ -14,7 +14,7 @@ and forced to live in constant fear. Heartbreaking stories of abandoned children
 
 It is devastating to watch children—who should be the future drivers of societal growth—cry in despair, 
 while parents are left in a state of helplessness and disappointment. Nigeria is just one example, 
-but similar challenges are faced by other African countries. From lack of necessities like clean water and shelter to the ongoing toll of the conflict, 
+but other African countries face similar challenges. From lack of necessities like clean water and shelter to the ongoing toll of the conflict, 
 the situation across the continent paints a grim picture. These are not just isolated incidents but systemic issues that require 
 urgent attention and sustainable solutions
 
@@ -31,19 +31,34 @@ Let’s build a future where compassion knows no boundaries and where every act 
 
 
 ## Key Features of the Application
-* A space where NGOs in need of help/sponsorship can find the assistance they need to make society a better place.
+* A space where NGOs can find the assistance they need to make society a better place.
 * We aim to connect NGOs to Philanthropists who are readily available to donate to causes.
-* These NGOs contact CareCove to create causes.
-* A wallet for both NGOs and Donors for sending and receiving money.
-* Every donation from these philanthropists will be received in $USD no matter the currency used these donations can then be sent out to the NGOs in their currencies if supported by tbDEX. This is to say;
+* These NGOs will contact CareCove to create causes.
+* A wallet for Donors who intend to send money in different currencies supported by tbDEX SDK.
+* Every donation from these philanthropists will be received by CareCove
 
-When an NGO from Nigeria or any other country adds a cause and a Philantopists donate with NGN, KES, GHS etc, CareCove will receive it in USD and when CoreCove wants to send it out to the NGO that created that particular cause, it will be sent as NGN, GHS, KES and any other currency as far as it supported by tbDEX.
+## CareCove Structure
+* An NGO contacts us to create a cause, by submitting the name of the NGO, contact information and cause details.
 
+* We go through their submission, send a series of emails and possibly hop on calls to ensure the genuineness of these NGOs.
+
+* If genuine, we approve the cause and upload it on CareCove.
+
+* Philanthropists/Donors come to our Application and decide to donate to a particular cause.
+
+* They need to create an account by signing up first. This account allows CareCove to manage customer's verifiable credentials.
+
+* Donors must already have some money in his/her wallet. (These currencies must be supported by the tbDEX SDK)
+
+* Donors can select a cause to donate to and proceed by clicking on donate.
+
+* If a donor has USD in their wallet, they send USD and select whatever currency they want to donate.
+  
 ## Building the WebApp
 ![Building the WebApp](./images/Images2.jpg)
 
 In this guide, we will be discussing our solution and how we built 
-our web app using technologies like Vs Code, HTML, CSS, Bootstrap, JavaScript, Tailwind, Node.Js, Express.Js, Typescript and Github.
+our web app using technologies like Vs Code, HTML, CSS, Bootstrap, JavaScript, Tailwind, Node.Js, Express.Js, Typescript Firebase and Github.
 
 ## Defining the workflow
 ![Defining the workflow](./images/Images1.jpg)
@@ -54,20 +69,34 @@ inclusive society by ensuring that everyone—children, parents, and individuals
 from all walks of life have access to opportunities, clean water, good food, and quality education.
 This is achieved by connecting NGOs to Philanthropists.
 
+## Design Considerations
+### Profitability
 
-##Web application structure
+
+### Optionability
+
+
+### Customer Management
+
+
+### Customer Satisfaction
+
+
+## Web application structure
 This web application consists of:
 
-* A landing page - This is where the product branding is implemented.  
-The header contains the objective of the project. The body contains the features and content of the Web Application.
+* A landing page - This is where CareCove's branding is implemented.  
+The header contains our objectives. The body contains the features and content of the Web Application.
 
 * Donation page - Using the tbDEX SDK, philanthropists can create a wallet for them to donate money in any currency supported by the SDK.
 
-* All causes page - Here, you can find a list of causes that were created by certain NGOs.
+* Sponsor page - Here, CareCove is calling out for sponsorship/partnership.
 
 * About us page - This is where one can find information about CareCove, Our vision, mission, sponsors etc.
 
-* Create cause page - NGOs can create causes for CareCove to approve on the Web Application.
+* Contact us page - NGOs can contact CareCove to create causes and CareCove approves them on the Web Application after carefully going through the causes.
+
+* Causes - Carries a list of all approved causes.
 
 
 ## Technologies used 
@@ -98,18 +127,30 @@ and interactive web content like applications and browsers.
 This is a code hosting platform for version control and collaboration. It lets 
 you and others work together on projects from anywhere.
 
-### [Tailwind]()
+### [Tailwind](https://tailwindcss.com/)
+Tailwind is a utility-first CSS framework that provides pre-designed classes to help developers quickly build custom, 
+responsive web layouts without writing custom CSS. It focuses on flexibility and speed, allowing easy styling directly in HTML.
 
-### [Express.Js]()
+### [Express.Js](https://expressjs.com/)
+Express.js is a fast, minimal web application framework for Node.js, designed to build web and mobile applications. 
+It simplifies handling requests, routing, and server-side logic, making it easier to create robust, scalable web applications.
 
-### [Node.Js]()
+### [Node.Js](https://nodejs.org/en)
+Node.js is a runtime environment that allows developers to run JavaScript on the server side. 
+It’s built on Chrome's V8 engine and is known for enabling fast, scalable, and efficient applications, especially for real-time or data-intensive tasks.
 
-### [Typescript]()
+### [Typescript](https://www.typescriptlang.org/)
+TypeScript is a programming language that extends JavaScript by adding static types. 
+It allows developers to catch errors early and write more robust, maintainable code, while still being compatible with existing JavaScript libraries and frameworks.
 
 These technologies were put together to build our Web Application.
 
 
 ## Future Progression
-*
+*Philanthropists might like to see where their donations are going. To ensure that these donors feel their money is being used properly, we will incorporate a dashboard detailing how the money is distributed. 
+
+*Gamify the experience, give these donors badges based on their donations, celebrating milestones and leaderboards. 
+
+*They can also share their milestones with their social media cycle
 
 

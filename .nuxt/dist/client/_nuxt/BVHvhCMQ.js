@@ -1,1 +1,0 @@
-import{_ as r}from"./DlAUqK2U.js";import{o,c as s,a as t}from"./vwRdSaPh.js";const n={},a={class:"flex justify-center items-center h-16"};function c(d,e){return o(),s("div",a,e[0]||(e[0]=[t("div",{class:"loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12"},null,-1)]))}const _=r(n,[["render",c],["__scopeId","data-v-5c1d9428"]]);export{_ as S};

@@ -1,4 +1,5 @@
-import nodePolyfills from 'vite-plugin-node-stdlib-browser'
+import nodePolyfills from 'vite-plugin-node-stdlib-browser';
+import stdLibBrowser from 'node-stdlib-browser';
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -7,10 +8,22 @@ export default defineNuxtConfig({
   pages: true,
   devtools: { enabled: true },
   modules: ["@nuxtjs/tailwindcss"],
+
   tailwindcss: {
     cssPath: '~/assets/css/main.css',
   },
+
   vite: {
     plugins: [nodePolyfills()],
+    resolve: {
+      alias: stdLibBrowser,
+    },
+    optimizeDeps: {
+      include: [
+        'node-stdlib-browser/helpers/esbuild/shim',
+      ],
+    },
   },
+
+  compatibilityDate: '2024-09-14',
 })

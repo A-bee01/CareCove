@@ -48,11 +48,23 @@ Let’s build a future where compassion knows no boundaries and where every act 
 
 * They need to create an account by signing up first. This account allows CareCove to manage customer's verifiable credentials.
 
-* Donors must already have some money in his/her wallet. (These currencies must be supported by the tbDEX SDK)
+* Donors should have some money in his/her wallet. (These currencies must be supported by the tbDEX SDK)
 
 * Donors can select a cause to donate to and proceed by clicking on donate.
 
 * If a donor has USD in their wallet, they send USD and select whatever currency they want to donate.
+
+* Select exchange rate offerings.
+
+* Input amount.
+
+* Money automatically comes to CareCove.
+
+* Request for Quote
+
+* And Quote will be shown in recent transactions.
+
+* The donor decides to proceed with donating by clicking on Pay or they may decide to cancel the transaction.
   
 ## Building the WebApp
 ![Building the WebApp](./images/Images2.jpg)
@@ -147,10 +159,14 @@ These technologies were put together to build our Web Application.
 
 
 ## Future Progression
-*Philanthropists might like to see where their donations are going. To ensure that these donors feel their money is being used properly, we will incorporate a dashboard detailing how the money is distributed. 
+* NGOs will be verified directly on CareCove and thereafter upload causes themselves.
 
-*Gamify the experience, give these donors badges based on their donations, celebrating milestones and leaderboards. 
+* Donors/Philanthropists can reach out and send money directly to NGOs.
 
-*They can also share their milestones with their social media cycle
+* Philanthropists might like to see where their donations are going. To ensure that these donors feel their money is being used properly, we will incorporate a dashboard detailing how the money is distributed. 
+
+* Gamify the experience, give these donors badges based on their donations, celebrating milestones and leaderboards. 
+
+* They can also share their milestones with their social media cycle
 
 

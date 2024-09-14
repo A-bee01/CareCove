@@ -27,9 +27,6 @@ In a world that can be divided, we believe in the power of kindness to create be
 Let’s build a future where compassion knows no boundaries and where every act of kindness brings us closer to oneness.
 
 
-## Access CareCove [here](https://carecove.vercel.app/#/)
-
-
 ## Key Features of the Application
 * A space where NGOs can find the assistance they need to make society a better place.
 * We aim to connect NGOs to Philanthropists who are readily available to donate to causes.

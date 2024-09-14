@@ -29,9 +29,6 @@ export default defineNuxtConfig({
     optimizeDeps: {
       include: [
         'node-stdlib-browser/helpers/esbuild/shim',
-        'firebase/app',
-        'firebase/auth',
-        'firebase/firestore',
       ],
       exclude: ['node-stdlib-browser', 'fs', 'path', 'os' ],
       esbuildOptions: {
@@ -39,6 +36,4 @@ export default defineNuxtConfig({
       }
     },
   },
-
-  compatibilityDate: '2024-04-03',
 })

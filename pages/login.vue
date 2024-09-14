@@ -32,6 +32,7 @@
   <script setup>
   import { ref } from 'vue';
   import { useRouter } from 'vue-router';
+  import { firebaseApp } from '~/src/firebaseConfig';
   import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, getAuth } from 'firebase/auth';
   import Header from '~/components/Header.vue';
   

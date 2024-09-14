@@ -7,7 +7,7 @@ import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { db } from '~/src/firebaseConfig'; // Firestore instance
 import { useRouter } from 'vue-router';
 
-// TODO 1: Choose Mock PFI DIDs using info about services they provide.
+// List Of Mock PFI DIDs and info about services they provide.
 const mockProviderDids = {
   aquafinance_capital: {
     uri: 'did:dht:3fkz5ssfxbriwks3iy5nwys3q5kyx64ettp9wfn1yfekfkiguj1y',
@@ -112,7 +112,7 @@ export const useStore = () => {
       const allOfferings = []
       for (const pfi of state.pfiAllowlist) {
         const pfiUri = pfi.pfiUri
-        // TODO 2: Fetch offerings from PFIs
+        // Fetch offerings from PFIs
         const offerings = await TbdexHttpClient.getOfferings({
           pfiDid: pfiUri
         })
@@ -127,13 +127,13 @@ export const useStore = () => {
   };
 
   const createExchange = async (offering, amount, payoutPaymentDetails) => {
-    // TODO 3: Choose only needed credentials to present using PresentationExchange.selectCredentials
+    // Choose only needed credentials to present using PresentationExchange.selectCredentials
     const selectedCredentials = PresentationExchange.selectCredentials({
       vcJwts: state.customerCredentials,
       presentationDefinition: offering.data.requiredClaims,
     })
 
-    // TODO 4: Create RFQ message to Request for a Quote
+    // Create RFQ message to Request for a Quote
     const rfq = Rfq.create({
       metadata: {
         from: state.customerDid.uri,
@@ -156,20 +156,20 @@ export const useStore = () => {
     })
 
     try {
-      // TODO 5: Verify offering requirements with RFQ - rfq.verifyOfferingRequirements(offering)
+      // Verify offering requirements with RFQ - rfq.verifyOfferingRequirements(offering)
       rfq.verifyOfferingRequirements(offering)
     } catch (e) {
       // handle failed verification
       console.log('Offering requirements not met', e)
     }
 
-    // TODO 6: Sign RFQ message
+    // Sign RFQ message
     await rfq.sign(state.customerDid)
 
     console.log('RFQ:', rfq)
 
     try {
-      // TODO 7: Submit RFQ message to the PFI .createExchange(rfq)
+      // Submit RFQ message to the PFI .createExchange(rfq)
       await TbdexHttpClient.createExchange(rfq)
     }
     catch (error) {
@@ -179,7 +179,7 @@ export const useStore = () => {
 
   const fetchExchanges = async (pfiUri) => {
     try {
-      // TODO 8: get exchanges from the PFI
+      // get exchanges from the PFI
       const exchanges = await TbdexHttpClient.getExchanges({
         pfiDid: pfiUri,
         did: state.customerDid
@@ -193,7 +193,7 @@ export const useStore = () => {
   }
 
   const addClose = async (exchangeId, pfiUri, reason) => {
-    // TODO 9: Create Close message, sign it, and submit it to the PFI
+    // Create Close message, sign it, and submit it to the PFI
     const close = Close.create({
       metadata: {
         from: state.customerDid.uri,
@@ -216,7 +216,7 @@ export const useStore = () => {
   }
 
   const addOrder = async (exchangeId, pfiUri) => {
-    // TODO 10: Create Order message, sign it, and submit it to the PFI
+    // Create Order message, sign it, and submit it to the PFI
     const order = Order.create({
       metadata: {
         from: state.customerDid.uri,

@@ -37,10 +37,11 @@ Let’s build a future where compassion knows no boundaries and where every act 
 * A wallet for Donors who intend to send money in different currencies supported by tbDEX SDK.
 * Every donation from these philanthropists will be received by CareCove
 
-## CareCove Structure
+## Using CareCove 
 * An NGO contacts us to create a cause, by submitting the name of the NGO, contact information and cause details.
 
-* We go through their submission, send a series of emails and possibly hop on calls to ensure the genuineness of these NGOs.
+* We go through their submission, send a series of emails and possibly hop on calls to ensure the genuineness of 
+  these NGOs.
 
 * If genuine, we approve the cause and upload it on CareCove.
 
@@ -110,19 +111,21 @@ Donor DIDs were required to be stored online so that they could manage their acc
 Donors' satisfaction with PFIs is being tracked by showing a rating submission form to rate how satisfied they were with the PFI used for a particular transaction.
 Every rating is being stored to gather satisfactory information.
 
-## Web application structure
+## Web Application Structure
 This web application consists of:
 
 * A landing page - This is where CareCove's branding is implemented.  
-The header contains our objectives. The body contains the features and content of the Web Application.
+  The header contains our objectives. The body contains the features and content of the Web Application.
 
-* Donation page - Using the tbDEX SDK, philanthropists can create a wallet for them to donate money in any currency supported by the SDK.
+* Donation page - Using the tbDEX SDK, philanthropists can create a wallet for them to donate money in any currency 
+  supported by the SDK.
 
 * Sponsor page - Here, CareCove is calling out for sponsorship/partnership.
 
 * About us page - This is where one can find information about CareCove, Our vision, mission, sponsors etc.
 
-* Contact us page - NGOs can contact CareCove to create causes and CareCove approves them on the Web Application after carefully going through the causes.
+* Contact us page - NGOs can contact CareCove to create causes and CareCove approves them on the Web Application 
+  after carefully going through the causes.
 
 * Causes - Carries a list of all approved causes.
 
@@ -256,6 +259,10 @@ It’s built on Chrome's V8 engine and is known for enabling fast, scalable, and
 TypeScript is a programming language that extends JavaScript by adding static types. 
 It allows developers to catch errors early and write more robust, maintainable code, while still being compatible with existing JavaScript libraries and frameworks.
 
+### [Firebase](https://firebase.google.com/)
+Firebase is a platform developed by Google for building and managing mobile and web applications. It provides a variety of tools and services, including a real-time database, authentication and others.
+
+
 These technologies were put together to build our Web Application.
 
 
@@ -264,7 +271,8 @@ These technologies were put together to build our Web Application.
 
 * Donors/Philanthropists can reach out and send money directly to NGOs.
 
-* Philanthropists might like to see where their donations are going. To ensure that these donors feel their money is being used properly, we will incorporate a dashboard detailing how the money is distributed. 
+* Philanthropists might like to see where their donations are going. To ensure that these donors feel their money is 
+  being used properly, we will incorporate a dashboard detailing how the money is distributed. 
 
 * Gamify the experience, give these donors badges based on their donations, celebrating milestones and leaderboards. 
 

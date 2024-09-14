@@ -20,4 +20,4 @@ getAnalytics(app);
 const db = getFirestore(firebaseApp)
 
 // here we can export reusable database references
-export const todosRef = collection(db, 'todos')
+export const donorsRef = collection(db, 'donors')

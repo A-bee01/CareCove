@@ -37,16 +37,17 @@ Let’s build a future where compassion knows no boundaries and where every act 
 * A wallet for Donors who intend to send money in different currencies supported by tbDEX SDK.
 * Every donation from these philanthropists will be received by CareCove
 
-## CareCove Structure
+## Using CareCove 
 * An NGO contacts us to create a cause, by submitting the name of the NGO, contact information and cause details.
 
-* We go through their submission, send a series of emails and possibly hop on calls to ensure the genuineness of these NGOs.
+* We go through their submission, send a series of emails and possibly hop on calls to ensure the genuineness of 
+  these NGOs.
 
 * If genuine, we approve the cause and upload it on CareCove.
 
 * Philanthropists/Donors come to our Application and decide to donate to a particular cause.
 
-* They need to create an account by signing up first. This account allows CareCove to manage customer's verifiable credentials.
+* They need to create a wallet account by signing up first. This account allows CareCove to manage customers' verifiable credentials and DIDs.
 
 * Donors should have some money in his/her wallet. (These currencies must be supported by the tbDEX SDK)
 
@@ -58,13 +59,17 @@ Let’s build a future where compassion knows no boundaries and where every act 
 
 * Input amount.
 
-* Money automatically comes to CareCove.
+* CareCove account details show up depending on the selected currency.
 
 * Request for Quote
 
 * And Quote will be shown in recent transactions.
 
 * The donor decides to proceed with donating by clicking on Pay or they may decide to cancel the transaction.
+
+* If the donor clicks on Pay, money automatically comes to CareCove.
+
+* CareCove reaches out to whatever NGO created the cause and sends them the money.
   
 ## Building the WebApp
 ![Building the WebApp](./images/Images2.jpg)
@@ -83,34 +88,44 @@ This is achieved by connecting NGOs to Philanthropists.
 
 ## Design Considerations
 ### Profitability
+#### CareCove's profitability strategy is centered around two key revenue streams: 
+* ##### Transaction fees
+  CareCove generates revenue by charging a small transaction fee for every service provided through the app, 
+  ensuring a sustainable income with each user interaction.
 
+* ##### Partnerships/Sponsorship
+  CareCove actively seeks sponsorships and partnerships with individuals/organizations aligned with our mission. 
+  These collaborations not only provide financial support but also open opportunities for joint ventures, enhancing 
+  our reach and credibility in the care services market. 
 
 ### Optionability
 CareCove handles matching offerings from multiple PFIs by showing the rates of each PFIs for the donors to select themselves.
 
 
 ### Customer Management
-CareCove manage donors DIDs and verifiable credentials by storing and retrieving their DIDs and verifiable credentials from both online secure database (firebase firestore) and offline database (localstorage).
-Donor DIDs were required to be stored online so that they can manage there accounts and and tracking previous transaction when they make change of device.
+CareCove manages donors' DIDs and verifiable credentials by storing and retrieving their DIDs and verifiable credentials from both an online secure database (firebase firestore) and an offline database (local storage).
+Donor DIDs were required to be stored online so that they could manage their accounts and track previous transactions, pay or cancel pending quotes when they change their devices.
 
 
 ### Customer Satisfaction
-Donors satisfaction with PFIs are being tracked by showing a rating submission form to rate how satisfied they were with the PFI used for a particular transaction.
+Donors' satisfaction with PFIs is being tracked by showing a rating submission form to rate how satisfied they were with the PFI used for a particular transaction.
 Every rating is being stored to gather satisfactory information.
 
-## Web application structure
+## Web Application Structure
 This web application consists of:
 
 * A landing page - This is where CareCove's branding is implemented.  
-The header contains our objectives. The body contains the features and content of the Web Application.
+  The header contains our objectives. The body contains the features and content of the Web Application.
 
-* Donation page - Using the tbDEX SDK, philanthropists can create a wallet for them to donate money in any currency supported by the SDK.
+* Donation page - Using the tbDEX SDK, philanthropists can create a wallet for them to donate money in any currency 
+  supported by the SDK.
 
 * Sponsor page - Here, CareCove is calling out for sponsorship/partnership.
 
 * About us page - This is where one can find information about CareCove, Our vision, mission, sponsors etc.
 
-* Contact us page - NGOs can contact CareCove to create causes and CareCove approves them on the Web Application after carefully going through the causes.
+* Contact us page - NGOs can contact CareCove to create causes and CareCove approves them on the Web Application 
+  after carefully going through the causes.
 
 * Causes - Carries a list of all approved causes.
 
@@ -170,11 +185,11 @@ The header contains our objectives. The body contains the features and content o
 
 ### Prerequisites
 
-**Vue.js**: `v5.4.5
+**Vue.js**: `v5.4.5`
 
 ### Installation
 
-Build the project from source:
+Build the project from the source:
 
 1. Clone the CareCove repository:
 ```sh
@@ -244,6 +259,10 @@ It’s built on Chrome's V8 engine and is known for enabling fast, scalable, and
 TypeScript is a programming language that extends JavaScript by adding static types. 
 It allows developers to catch errors early and write more robust, maintainable code, while still being compatible with existing JavaScript libraries and frameworks.
 
+### [Firebase](https://firebase.google.com/)
+Firebase is a platform developed by Google for building and managing mobile and web applications. It provides a variety of tools and services, including a real-time database, authentication and others.
+
+
 These technologies were put together to build our Web Application.
 
 
@@ -252,7 +271,8 @@ These technologies were put together to build our Web Application.
 
 * Donors/Philanthropists can reach out and send money directly to NGOs.
 
-* Philanthropists might like to see where their donations are going. To ensure that these donors feel their money is being used properly, we will incorporate a dashboard detailing how the money is distributed. 
+* Philanthropists might like to see where their donations are going. To ensure that these donors feel their money is 
+  being used properly, we will incorporate a dashboard detailing how the money is distributed. 
 
 * Gamify the experience, give these donors badges based on their donations, celebrating milestones and leaderboards. 
 

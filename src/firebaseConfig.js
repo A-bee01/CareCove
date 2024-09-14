@@ -19,4 +19,3 @@ export const firebaseApp = initializeApp(firebaseConfig);
 // Firebase services
 export const auth = getAuth(firebaseApp);
 export const db = getFirestore(firebaseApp);
-getAnalytics(firebaseApp);

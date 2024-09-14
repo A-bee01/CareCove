@@ -58,13 +58,17 @@ Let’s build a future where compassion knows no boundaries and where every act 
 
 * Input amount.
 
-* Money automatically comes to CareCove.
+* CareCove account details show up depending on the selected currency.
 
 * Request for Quote
 
 * And Quote will be shown in recent transactions.
 
 * The donor decides to proceed with donating by clicking on Pay or they may decide to cancel the transaction.
+
+* If the donor clicks on Pay, money automatically comes to CareCove.
+
+* CareCove reaches out to whatever NGO created the cause and sends them the money.
   
 ## Building the WebApp
 ![Building the WebApp](./images/Images2.jpg)
@@ -90,12 +94,12 @@ CareCove handles matching offerings from multiple PFIs by showing the rates of e
 
 
 ### Customer Management
-CareCove manage donors DIDs and verifiable credentials by storing and retrieving their DIDs and verifiable credentials from both online secure database (firebase firestore) and offline database (localstorage).
-Donor DIDs were required to be stored online so that they can manage there accounts and and tracking previous transaction when they make change of device.
+CareCove manages donors' DIDs and verifiable credentials by storing and retrieving their DIDs and verifiable credentials from both an online secure database (firebase firestore) and an offline database (local storage).
+Donor DIDs were required to be stored online so that they could manage their accounts and track previous transactions, pay or cancel pending quotes when they change their devices.
 
 
 ### Customer Satisfaction
-Donors satisfaction with PFIs are being tracked by showing a rating submission form to rate how satisfied they were with the PFI used for a particular transaction.
+Donors' satisfaction with PFIs is being tracked by showing a rating submission form to rate how satisfied they were with the PFI used for a particular transaction.
 Every rating is being stored to gather satisfactory information.
 
 ## Web application structure
@@ -170,11 +174,11 @@ The header contains our objectives. The body contains the features and content o
 
 ### Prerequisites
 
-**Vue.js**: `v5.4.5
+**Vue.js**: `v5.4.5`
 
 ### Installation
 
-Build the project from source:
+Build the project from the source:
 
 1. Clone the CareCove repository:
 ```sh

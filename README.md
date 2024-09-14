@@ -74,13 +74,17 @@ This is achieved by connecting NGOs to Philanthropists.
 
 
 ### Optionability
+CareCove handles matching offerings from multiple PFIs by showing the rates of each PFIs for the donors to select themselves.
 
 
 ### Customer Management
+CareCove manage donors DIDs and verifiable credentials by storing and retrieving their DIDs and verifiable credentials from both online secure database (firebase firestore) and offline database (localstorage).
+Donor DIDs were required to be stored online so that they can manage there accounts and and tracking previous transaction when they make change of device.
 
 
 ### Customer Satisfaction
-
+Donors satisfaction with PFIs are being tracked by showing a rating submission form to rate how satisfied they were with the PFI used for a particular transaction.
+Every rating is being stored to gather satisfactory information.
 
 ## Web application structure
 This web application consists of:
@@ -98,6 +102,91 @@ The header contains our objectives. The body contains the features and content o
 
 * Causes - Carries a list of all approved causes.
 
+## Repository Structure
+```sh
+└── CareCove/
+    ├── .github
+    │   ├── FUNDING.yml
+    │   └── workflows
+    ├── README.md
+    ├── app.vue
+    ├── assets
+    │   ├── css
+    │   └── loading.gif
+    ├── components
+    │   ├── Balances.vue
+    │   ├── Credentials.vue
+    │   ├── Header.vue
+    │   ├── Spinner.vue
+    │   ├── Toast.vue
+    │   ├── TransactionModal.vue
+    │   └── Transactions.vue
+    ├── data_providers
+    │   └── data.js
+    ├── dist
+    ├── firebase.json
+    ├── images
+    │   ├── Images1.jpg
+    │   ├── Images2.jpg
+    │   ├── Images3.png
+    │   └── favicon.ico
+    ├── nuxt.config.ts
+    ├── package-lock.json
+    ├── package.json
+    ├── pages
+    │   ├── credentials.vue
+    │   ├── dashboard.vue
+    │   ├── donate.vue
+    │   └── login.vue
+    ├── public
+    │   ├── about.html
+    │   ├── assets
+    │   ├── blog-details.html
+    │   ├── blog.html
+    │   ├── causes-details.html
+    │   ├── causes.html
+    │   ├── contact.html
+    │   ├── event-details.html
+    │   ├── index.html
+    │   └── sponsor.html
+    ├── rollup.config.js
+    ├── src
+    │   └── firebaseConfig.js
+    ├── tailwind.config.js
+    └── tsconfig.json
+```
+
+### Prerequisites
+
+**Vue.js**: `v5.4.5
+
+### Installation
+
+Build the project from source:
+
+1. Clone the CareCove repository:
+```sh
+❯ git clone https://github.com/A-bee01/CareCove
+```
+
+2. Navigate to the project directory:
+```sh
+❯ cd CareCove
+```
+
+3. Install the required dependencies:
+```sh
+❯ npm install
+```
+
+### Usage
+
+To run the project, execute the following command:
+
+```sh
+❯ npm run dev
+```
+then open http://localhost:3000 on your browser to preview.
 
 ## Technologies used 
 ![Technologies used](./images/Images3.png)

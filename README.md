@@ -93,10 +93,10 @@ This is achieved by connecting NGOs to Philanthropists.
 * ##### Partnerships/Sponsorship
   CareCove actively seeks sponsorships and partnerships with individuals/organizations aligned with our mission. 
   These collaborations not only provide financial support but also open opportunities for joint ventures, enhancing 
-  our reach and credibility in the care services market. 
+  our reach. 
 
 ### Optionability
-CareCove handles matching offerings from multiple PFIs by showing the rates of each PFIs for the donors to select themselves.
+CareCove handles matching offerings from multiple PFIs by showing the rates of each PFIs for the donors to select from themselves.
 
 
 ### Customer Management

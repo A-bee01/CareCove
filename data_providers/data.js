@@ -53,7 +53,7 @@ export const useStore = () => {
   // Check if window object is available (client-side)
   if (typeof window !== 'undefined') {
     const storedBalance = localStorage.getItem('walletBalance');
-    state.balance = parseFloat(storedBalance) || 1000;
+    state.balance = parseFloat(storedBalance) || 10000;
   }
 
   const loadBalance = async () => {
@@ -84,12 +84,12 @@ export const useStore = () => {
           localStorage.setItem('walletBalance', state.balance.toString());
         } else {
           // Set default balance if none is found
-          state.balance = 1000;
+          state.balance = 10000;
           console.log('No balance found, setting to default (1000)');
         }
       } else {
         console.log('User document does not exist in Firestore.');
-        state.balance = 1000; // Set default balance if user doc doesn't exist
+        state.balance = 10000; // Set default balance if user doc doesn't exist
         await setDoc(userDocRef, { balance: state.balance }); // Save default balance to Firestore
       }
     } catch (error) {

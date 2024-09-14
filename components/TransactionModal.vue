@@ -149,6 +149,7 @@ const pay = async () => {
     
  // }
   loading.value = false;
+  window.location.reload();
   emit('close');
 };
 </script>

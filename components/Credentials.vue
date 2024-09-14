@@ -4,6 +4,7 @@
     <div v-if="parsedCredentials.length">
       <div v-for="credential, index in parsedCredentials" :key="index" class="mb-4 p-4 border rounded-lg lg:w-1/2 w-full">
         <p><strong>{{ credential.title }} </strong></p>
+        <p><strong>Name:</strong> {{ credential.name }}</p>
         <p><strong>Country Code:</strong> {{ credential.countryCode }}</p>
         <p><strong>Date:</strong> {{ credential.issuanceDate }}</p>
       </div>

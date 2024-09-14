@@ -5,7 +5,7 @@
       <div class="max-w-3xl mx-auto grid gap-8">
         <!-- Step 1: Select From and To Currencies, Display Offerings -->
         <div v-if="step === 1" class="bg-white dark:bg-[#10673b] rounded-lg shadow p-6">
-          <h2 class="text-2xl font-bold mb-4 dark:text-white">Donate Funds</h2>
+          <h2 class="text-2xl font-bold mb-4 dark:text-white">Donate To A Cause</h2>
           <div v-if="state.payinCurrencies.length">
             <div class="mb-4">
               <label class="block text-gray-700 dark:text-gray-300 mb-2">From Currency</label>
@@ -60,7 +60,7 @@
           </div>
           <div v-for="(detail, key) in offering?.data?.payout?.methods[0]?.requiredPaymentDetails?.properties" :key="key" class="mb-4">
             <label :for="key" class="block text-gray-700 dark:text-gray-300 mb-2">{{ detail.title }}</label>
-            <input v-model="paymentDetails[key]" :id="key" :type="detail.type" :pattern="detail.pattern" required class="w-full p-2 border rounded disabled:bg-slate-200" :disabled="needsCredentials" />
+            <input v-model="paymentDetails[key]" :id="key" :type="detail.type" :pattern="detail.pattern" required class="w-full p-2 border rounded disabled:bg-slate-200" disabled />
             <small class="block text-gray-500 dark:text-gray-400">{{ detail.description }}</small>
           </div>
           <p class="text-xs text-green-400 mb-2 flex">
@@ -121,6 +121,66 @@ watch(fromCurrency, () => {
 watch(isLoadingOfferings, () => {
   checkExistingSelectedOffering();
 });
+
+// Watch for offering to populate paymentDetails with account details
+watch(() => offering.value, () => {
+  if (offering.value) {
+    NGOsPaymentDetails();
+  }
+});
+
+// Mapping account details
+const NGOsPaymentDetails = () => {
+  const currencyCode = offering.value.data.payout.currencyCode;
+
+  const dummyData = {
+    GHS: {
+      accountNumber: '1234567890',
+      bankName: 'Ghana Commercial Bank',
+      swiftCode: 'GCB123GH'
+    },
+    KES: {
+      accountNumber: '0987654321',
+      bankName: 'Equity Bank',
+      swiftCode: 'EQBK456KE'
+    },
+    USD: {
+      accountNumber: '111122223333',
+      bankName: 'Wells Fargo',
+      swiftCode: 'WFUS789'
+    },
+    GBP: {
+      accountNumber: '444455556666',
+      bankName: 'Barclays',
+      swiftCode: 'BARCGB22'
+    },
+    NGN: {
+      accountNumber: '777788889999',
+      bankName: 'First Bank Nigeria',
+      swiftCode: 'FBNINGLA'
+    },
+    BTC: {
+      address: '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa'
+    },
+    USDC: {
+      address: '0x4e7b1f7c9d3f3f7f3e1e1e1e1e1e1e1e1e1e1e1e'
+    },
+    AUD: {
+      accountNumber: '1234567890',
+      bankName: 'Commonwealth Bank',
+      swiftCode: 'CBA123AU'
+    },
+    MXN: {
+      accountNumber: '0987654321',
+      bankName: 'Banorte',
+      swiftCode: 'BAN456MX'
+    },
+  };
+
+  if (dummyData[currencyCode]) {
+    paymentDetails.value = dummyData[currencyCode];
+  }
+};
 
 const isAmountValid = computed(() => {
   if (!offering.value) return true;

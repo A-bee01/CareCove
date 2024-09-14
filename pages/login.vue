@@ -3,7 +3,7 @@
       <Header />
       <main class="flex-1 bg-[#ffffff] dark:bg-[#ffffff] py-8 px-6 md:px-8">
         <div class="max-w-3xl mx-auto bg-white dark:bg-[#10673b] rounded-lg shadow p-6">
-          <h2 class="text-2xl font-bold mb-4 dark:text-white">Login / Register</h2>
+          <h2 class="text-2xl font-bold mb-4 dark:text-white">Login / Register To Donate</h2>
   
           <form @submit.prevent="loginWithEmail">
             <div class="mb-4">

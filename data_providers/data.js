@@ -483,7 +483,7 @@ export const useStore = () => {
         }
 
         // Persist balance to Firestore
-        const userDocRef = doc(db, 'users', user.uid);
+        const userDocRef = doc(db, 'donors', user.email);
         await setDoc(userDocRef, { balance: state.balance }, { merge: true });
         console.log('Balance deducted and updated in Firestore:', state.balance);
 

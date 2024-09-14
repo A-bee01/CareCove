@@ -47,6 +47,11 @@
       router.push('/dashboard'); // Redirect after successful login
     } catch (error) {
       console.error('Error logging in with email/password:', error);
+      if (error.code === 'auth/user-not-found') {
+        console.error('User not found. Please sign up.');
+        await createUserWithEmailAndPassword(auth, email.value, password.value);
+        router.push('/dashboard'); // Redirect after successful signup
+      }
     }
   };
   

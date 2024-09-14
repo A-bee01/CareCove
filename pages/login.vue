@@ -8,11 +8,11 @@
           <form @submit.prevent="loginWithEmail">
             <div class="mb-4">
               <label class="block text-gray-700 dark:text-gray-300 mb-2">Email</label>
-              <input v-model="email" type="email" required class="w-full p-2 border rounded" />
+              <input v-model="email" type="email" required class="w-full p-2 border rounded" placeholder="Email" />
             </div>
             <div class="mb-4">
               <label class="block text-gray-700 dark:text-gray-300 mb-2">Password</label>
-              <input v-model="password" type="password" required class="w-full p-2 border rounded" />
+              <input v-model="password" type="password" required class="w-full p-2 border rounded" placeholder="Password" />
             </div>
             <button type="submit" class="inline-flex items-center justify-center rounded-md text-sm font-medium bg-blue-500 text-white hover:bg-blue-600 h-10 px-4 py-2">
              Continue
@@ -32,7 +32,6 @@
   <script setup>
   import { ref } from 'vue';
   import { useRouter } from 'vue-router';
-  import { firebaseApp } from '~/src/firebaseConfig';
   import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, getAuth } from 'firebase/auth';
   import Header from '~/components/Header.vue';
   

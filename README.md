@@ -70,7 +70,7 @@ Let’s build a future where compassion knows no boundaries and where every act 
 ![Building the WebApp](./images/Images2.jpg)
 
 In this guide, we will be discussing our solution and how we built 
-our web app using technologies like Vs Code, HTML, CSS, Bootstrap, JavaScript, Tailwind, Node.Js, Express.Js, Typescript Firebase and Github.
+our web app using technologies like Vs Code, HTML, CSS, Bootstrap, JavaScript, Tailwind, Node.Js, Express.Js, Typescript, Firebase and Github.
 
 ## Defining the workflow
 ![Defining the workflow](./images/Images1.jpg)

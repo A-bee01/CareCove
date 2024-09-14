@@ -27,9 +27,6 @@ In a world that can be divided, we believe in the power of kindness to create be
 Let’s build a future where compassion knows no boundaries and where every act of kindness brings us closer to oneness.
 
 
-## Access CareCove [here](https://carecove.vercel.app/#/)
-
-
 ## Key Features of the Application
 * A space where NGOs can find the assistance they need to make society a better place.
 * We aim to connect NGOs to Philanthropists who are readily available to donate to causes.
@@ -96,15 +93,15 @@ This is achieved by connecting NGOs to Philanthropists.
 * ##### Partnerships/Sponsorship
   CareCove actively seeks sponsorships and partnerships with individuals/organizations aligned with our mission. 
   These collaborations not only provide financial support but also open opportunities for joint ventures, enhancing 
-  our reach and credibility in the care services market. 
+  our reach. 
 
 ### Optionability
-CareCove handles matching offerings from multiple PFIs by showing the rates of each PFIs for the donors to select themselves.
+CareCove handles matching offerings from multiple PFIs by showing the rates of each PFIs for the donors to select from themselves.
 
 
 ### Customer Management
-CareCove manages donors' DIDs and verifiable credentials by storing and retrieving their DIDs and verifiable credentials from both an online secure database (firebase firestore) and an offline database (local storage).
-Donor DIDs were required to be stored online so that they could manage their accounts and track previous transactions, pay or cancel pending quotes when they change their devices.
+CareCove manages donors' DIDs and verifiable credentials by storing and retrieving their DIDs and verifiable credentials from an online secure database (firebase firestore) and an offline database (local storage).
+Donors' DIDs are stored online so that they can manage their account and track previous transactions, pay or cancel pending quotes when they change their device.
 
 
 ### Customer Satisfaction

@@ -199,7 +199,7 @@
 <script setup>
 import { ref, watch } from "vue";
 import Header from "~/components/Header.vue";
-import { useStore } from "~/data_providers/data.js";
+import { useStore } from "~/src/data.js";
 import { useRouter } from "vue-router";
 import Spinner from "~/components/Spinner.vue";
 
@@ -256,7 +256,7 @@ watch(
 const NGOsPaymentDetails = () => {
   const currencyCode = offering.value.data.payout.currencyCode;
 
-  const dummyData = {
+  const accountDetails = {
     GHS: {
       accountNumber: "1234567890",
       bankName: "Ghana Commercial Bank",
@@ -300,8 +300,8 @@ const NGOsPaymentDetails = () => {
     },
   };
 
-  if (dummyData[currencyCode]) {
-    paymentDetails.value = dummyData[currencyCode];
+  if (accountDetails[currencyCode]) {
+    paymentDetails.value = accountDetails[currencyCode];
   }
 };
 

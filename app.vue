@@ -4,7 +4,7 @@
     </div>
   </template>
   <script setup lang="ts">
-  import { useStore } from '~/data_providers/data';
+  import { useStore } from '~/src/data';
   import { firebaseApp } from '~/src/firebaseConfig';
   import { provide } from 'vue';
   

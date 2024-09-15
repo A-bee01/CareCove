@@ -16,7 +16,7 @@
 </template>
 
 <script setup>
-import { useStore } from '~/data_providers/data';
+import { useStore } from '~/src/data';
 
 const { state, renderCredential } = useStore();
 

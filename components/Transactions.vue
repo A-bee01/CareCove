@@ -37,7 +37,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import { useStore } from '~/data_providers/data.js';
+import { useStore } from '~/src/data.js';
 import Spinner from '~/components/Spinner.vue'
 import TransactionModal from '~/components/TransactionModal.vue';
 

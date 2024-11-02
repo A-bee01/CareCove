@@ -42,6 +42,6 @@ const createCredential = async () => {
 
   addCredential(credential);
 
-  router.push('/donate');
+  router.push('/dashboard');
 };
 </script>

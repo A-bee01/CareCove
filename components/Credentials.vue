@@ -11,16 +11,28 @@
     </div>
     <div v-else>
       <p>No credentials found.</p>
+      <br />
+      <button @click="createCredential" class="inline-flex items-center justify-center rounded-md text-sm font-medium bg-blue-500 text-white hover:bg-blue-600 h-10 px-4 py-2">
+        Create Credential
+      </button>
     </div>
   </div>
 </template>
 
 <script setup>
 import { useStore } from '~/src/data';
+import { computed } from 'vue';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
 
 const { state, renderCredential } = useStore();
 
 const parsedCredentials = computed(() =>
   state.customerCredentials.map(jwt => renderCredential(jwt))
 );
+
+const createCredential = () => {
+  router.push('/credentials');
+};
 </script>

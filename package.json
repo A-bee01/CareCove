@@ -22,6 +22,7 @@
     "vitest": "^0.33.0"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.6.0",
     "@tbdex/http-client": "^1.1.0",
     "@web5/common": "1.0.0",
     "@web5/credentials": "^1.0.3",
@@ -30,7 +31,9 @@
     "cors": "^2.8.5",
     "express": "^4.21.0",
     "firebase": "^10.13.1",
+    "jquery": "^3.7.1",
     "lucide-vue-next": "^0.441.0",
+    "sweetalert2": "^11.14.4",
     "vuefire": "^3.2.0"
   },
   "type": "module"

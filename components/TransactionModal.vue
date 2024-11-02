@@ -111,10 +111,13 @@
 </template>
 
 <script setup>
+import { ref } from 'vue';
+import Swal from 'sweetalert2';
 import { computed } from 'vue';
 import { useStore } from '~/src/data.js';
 import Spinner from '~/components/Spinner.vue'
-
+import '@fortawesome/fontawesome-free/css/all.css';
+import $ from 'jquery';
 
 const { state, addOrder, addClose, deductAmount } = useStore();
 const loading = ref(false);
@@ -143,18 +146,84 @@ const reject = async () => {
 const pay = async () => {
   // Handle payment logic
   loading.value = true;
-  await addOrder(props.transaction.id, props.transaction.pfiDid)
- //if(props.transaction.payinCurrency === 'TB$' && props.transaction.payoutCurrency === 'USDC') {
-  await deductAmount(props.transaction.payinAmount)
-    
- // }
+  await addOrder(props.transaction.id, props.transaction.pfiDid);
+
+  // Simulate deducting the amount, or add your custom logic here
+  await deductAmount(props.transaction.payinAmount);
+
+  Swal.fire('Payment successful', 'Your payment has been successfully processed', 'success');
+
   loading.value = false;
-  window.location.reload();
+
+  // Show SweetAlert2 5-Star Rating Modal after successful payment
+  Swal.fire({
+    title: `Rate Your Experience With <b>${state.pfiAllowlist.find(pfi => pfi.pfiUri === props.transaction.pfiDid).pfiName}</b>`,
+    html: `
+      <div style="font-size: 20px;">
+        <i class="fa fa-star" data-value="1" style="color: lightgray; cursor: pointer;" id="star1"></i>
+        <i class="fa fa-star" data-value="2" style="color: lightgray; cursor: pointer;" id="star2"></i>
+        <i class="fa fa-star" data-value="3" style="color: lightgray; cursor: pointer;" id="star3"></i>
+        <i class="fa fa-star" data-value="4" style="color: lightgray; cursor: pointer;" id="star4"></i>
+        <i class="fa fa-star" data-value="5" style="color: lightgray; cursor: pointer;" id="star5"></i>
+      </div>
+    `,
+    showCancelButton: true,
+    confirmButtonText: 'Submit',
+    preConfirm: () => {
+      const rating = document.querySelector('.fa-star.selected');
+      return rating ? rating.getAttribute('data-value') : null;
+    },
+    // Use didOpen to attach event listeners once the modal is fully rendered
+    didOpen: () => {
+      $(document).on('click', '.fa-star', function () {
+        const selectedRating = $(this).data('value');
+        console.log('Selected rating:', selectedRating); // Debugging
+
+        // Reset all stars
+        $('.fa-star').css('color', 'lightgray').removeClass('selected');
+
+        // Highlight selected stars
+        for (let i = 1; i <= selectedRating; i++) {
+          $(`#star${i}`).css('color', 'gold').addClass('selected');
+        }
+      });
+    }
+  }).then((result) => {
+    if (result.isConfirmed) {
+      const rating = result.value;
+      if (rating) {
+        Swal.fire(`Thank you for your rating!`);
+      } else {
+        Swal.fire('No rating submitted');
+      }
+    }
+  });
+
+
+  // Add click event listeners for the stars
+  setTimeout(() => {
+    const stars = document.querySelectorAll('.swal2-content .fa-star');
+    stars.forEach(star => {
+      star.addEventListener('click', (e) => {
+        const selectedRating = e.currentTarget.getAttribute('data-value');
+        stars.forEach(s => s.style.color = 'lightgray');
+        for (let i = 0; i < selectedRating; i++) {
+          stars[i].style.color = 'gold';
+          stars[i].classList.add('selected');
+        }
+      });
+    });
+  }, 100);
+
   emit('close');
 };
 </script>
 
 <style scoped>
+.swal2-content .fa-star {
+  font-size: 2rem;
+  margin: 0 5px;
+}
 .bg-primary {
   background-color: #3b82f6; /* Primary color */
 }

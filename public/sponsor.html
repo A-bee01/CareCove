@@ -277,9 +277,21 @@
                 return;
               }
               var receiver = "godsabundance.c@gmail.com";
-              window.open(
-                `mailto:${receiver}?subject=CareCove Sponsorship&body=Name: ${name}%0D%0AEmail: ${email}%0D%0APhone: ${phone}%0D%0AMessage: ${message}`
-              );
+              // window.open(
+              //   `mailto:${receiver}?subject=CareCove Sponsorship&body=Name: ${name}%0D%0AEmail: ${email}%0D%0APhone: ${phone}%0D%0AMessage: ${message}`
+              // );
+
+              Swal.fire({
+                            title: "Success!",
+                            text: "Your message has been sent successfully.",
+                            icon: "success",
+                            confirmButtonText: "Ok",
+                          }).then((result) => {
+                            if (result.isConfirmed) {
+                             //reload page
+                              location.reload();
+                            }
+                          });
             });
         </script>
 

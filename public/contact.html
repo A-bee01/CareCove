@@ -42,6 +42,8 @@
     <link href="/assets/css/swiper.min.css" rel="stylesheet" />
     <!--== Main Style CSS ==-->
     <link href="/assets/css/style.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
   </head>
 
   <body>
@@ -264,25 +266,36 @@
 
                           var receiver = "godsabundance.c@gmail.com";
 
-                          window.open(
-                            "mailto:" +
-                              receiver +
-                              "?subject=" +
-                              title +
-                              "&body=" +
-                              message +
-                              "%0A%0A" +
-                              name +
-                              "%0A" +
-                              email +
-                              "%0A" +
-                              phone
-                          );
+                          Swal.fire({
+                            title: "Success!",
+                            text: "Your request has been sent successfully",
+                            icon: "success",
+                            confirmButtonText: "Ok",
+                          }).then((result) => {
+                            if (result.isConfirmed) {
+                             //reload page
+                              location.reload();
+                            }
+                          });
+
+                          // window.open(
+                          //   "mailto:" +
+                          //     receiver +
+                          //     "?subject=Create A Cause Request - " +
+                          //     title +
+                          //     "&body=" +
+                          //     message +
+                          //     "%0A%0A" +
+                          //     name +
+                          //     "%0A" +
+                          //     email +
+                          //     "%0A" +
+                          //     phone
+                          // );
                         });
                     </script>
                   </div>
                   <!-- Message Notification -->
-                  <div class="form-message"></div>
                   <div class="contact-map-area">
                     <div class="contact-info-content">
                       <div class="contact-info-item">
